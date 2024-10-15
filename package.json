@@ -1,0 +1,44 @@
+{
+    "name": "read-me-revamp",
+    "version": "0.2.0",
+    "description": "Project packaging, version control and changelogs",
+    "main": "./dist/main.js",
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./dist/main.d.ts",
+                "default": "./dist/main.js"
+            },
+            "require": {
+                "types": "./dist/main.d.ts",
+                "default": "./dist/main.cjs"
+            }
+        }
+    },
+    "types": "./dist/main.d.ts",
+    "bin": "./dist/bin/read-me-revamp.cjs",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "ts-node --project tsconfig-dev.json ./src/bin/read-me-revamp.ts version --minor 1.0.0",
+        "dev2": "ts-node --project tsconfig-dev.json ./src/bin/read-me-revamp.ts git-log --template-name=r[$version]-alpha --version=1.6.0",
+        "dev3": "ts-node --project tsconfig-dev.json ./src/bin/read-me-revamp.ts git-log",
+        "format": "prettier --ignore-path .prettierignore --check --write ./src",
+        "build": "npm run format && rimraf ./dist && rollup -c && npm pack"
+    },
+    "author": "guiurm@gmail.com",
+    "license": "MIT",
+    "devDependencies": {
+        "@rollup/plugin-typescript": "~11.1.6",
+        "@types/node": "~22.4.1",
+        "prettier": "3.3.3",
+        "rimraf": "~6.0.1",
+        "rollup": "~4.21.0",
+        "ts-node": "~10.9.2",
+        "tsc-alias": "~1.8.10",
+        "tslib": "~2.6.3",
+        "typescript": "~5.5.4"
+    }
+}
+
